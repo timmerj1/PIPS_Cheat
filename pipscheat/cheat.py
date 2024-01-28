@@ -9,7 +9,7 @@ def cheat(question: str = "2.2P.11"):
     question (str): question you need help with, include P for Python questions.
     Do not start `question` with Q.
     """
-    my_resources = importlib_resources.files("pipscheat")
+    my_resources = importlib_resources.files(__package__)
     if question == "2.2P.11":
         with my_resources.open("videopoker.py", encoding="utf8") as file:
             out = file.readlines()
