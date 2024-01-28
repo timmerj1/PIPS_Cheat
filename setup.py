@@ -7,7 +7,7 @@ setup(
     author='Jeroen Timmerman',
     author_email='timmerman.jeroen@gmail.com',
     # Needed to actually package something
-    packages=['measure'],
+    packages=['pipscheat'],
     # Needed for dependencies
     install_requires=['numpy'],
     # *strongly* suggested for sharing
