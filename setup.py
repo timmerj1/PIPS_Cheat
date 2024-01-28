@@ -17,4 +17,5 @@ setup(
     description='Python packeage to cheat on PIPS Python assignments.',
     # We will also need a readme eventually (there will be a warning)
     long_description=open('README.md', encoding="utf8").read(),
+    include_package_data=True
 )
