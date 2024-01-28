@@ -24,12 +24,12 @@ random_uniform_data = np.random.uniform(-10, 10, 100)
 
 plt.figure()
 plt.boxplot(random_uniform_data)
-plt.show()
+plt.savefig("Py_uniform_boxplot.png", dpi = 300)
 
 plt.figure()
 sns.violinplot(random_uniform_data)
 sns.stripplot(random_uniform_data)
-plt.show()
+plt.savefig("Py_uniform_violin_jitter.png", dpi = 300)
 
 # I found the boxplot more readable than the violinplot by itself, but the
 # jitterplot portion of the violin plot was quite insightful as it really looked
@@ -59,7 +59,7 @@ slope, intercept = np.polyfit(survival['Age'], survival['Survived'], 1)
 
 survival.plot.scatter(x = 'Age', y = 'Survived')
 plt.plot(survival['Age'], slope*survival['Age'] + intercept)
-plt.show()
+plt.savefig("Py_titanic_survival.png", dpi = 300)
 
 ## Q3.2P.3
 
@@ -76,7 +76,7 @@ tips_data.plot.scatter('total_bill', 'tip')
 plt.plot(tips_data['total_bill'], slope * tips_data['total_bill'] + intercept)
 plt.xlabel('Total Bill', fontsize = 20)
 plt.ylabel('Tips', fontsize = 20)
-plt.show()
+plt.savefig("Py_tips_scatter.png", dpi = 300)
 
 ## Q3.2P.4
 
@@ -92,7 +92,7 @@ diamonds_data = sns.load_dataset('diamonds')
 fig, ax = plt.subplots(1, 2)
 sns.heatmap(diamonds_data.select_dtypes(include = "number").corr(), ax = ax[0])
 sns.kdeplot(diamonds_data, x = 'carat', y = 'price', ax=ax[1])
-plt.show()
+plt.savefig("Py_diamonds.png", dpi = 300)
 
 ## Q3.2P.5
 
@@ -110,20 +110,23 @@ def my_plots(yay_or_eww: str):
     uninformative plot when input is "eww"."""
     x = np.random.normal(100,15,100)
     y = 0.5 * x + 30 + np.random.standard_normal(100)
-    plt.figure()
+    plot = plt.figure()
     if yay_or_eww.casefold() == "eww":
-        plt.bar(x, y + np.random.normal(0,50,100)) # uninformative plot
+        plt.bar(x, y + np.random.normal(0,50,100))
+        return plot
     elif yay_or_eww.casefold() == "yay":
         plt.scatter(x,y) 
         plt.plot(x, 0.5 * x + 30)
         plt.title('Simulation y = 0.5x + 30 + E')
         plt.xlabel('x')
         plt.ylabel('y')
+        return plot
     else:
         warnings.warn('Function should either be used with "eww" or "yay"')
-    plt.show(block = False)
+        return plot
 
-my_plots("eww")
+my_plots("YAY")
+plt.savefig("Py_yay.png", dpi = 300)
 
 ## Q3.2P.6
 
@@ -257,7 +260,7 @@ import random
 import time
 
 # Deck has to be defined outside of class because otherwise ranks and suits are
-# not callable to get deck.
+# not callable to get deck
 ranks = [str(i) for i in range(2,11)] + ["J","Q","K", "A"]
 suits = ["\u2663", "\u2665", "\u2666", "\u2660"]
 deck = [i + j for i in ranks for j in suits]
@@ -405,5 +408,29 @@ one of these issues and state in two brief sentences which side you are on.
 
 ## Q3.2P.8
 
+"""
+Michael is a sloppy Python coder: https://github.com/mdnunez/pyhddmjags/blob/master/pyhddmjagsutils.py 
+Choose one of his functions to improve by using a pylint and creating better 
+variable names and comments. Explain what you did to change his code to PEP8 and
+discuss how else you improved his code. If his old code was already perfect 
+explain why.
+"""
 
-
+def shape_stan_samples(samples_in: dict):
+    """For each value in dictionary not starting with '_', moves first two 
+    axes of shape to last two positions in shape. If there are only two axes,
+    an extra dimension is added."""
+    result = {} # To store reshaped samples in
+    for key in samples_in.keys():
+        if key[0] != '_':
+            possamps = samples_in[key]
+            # Move first 2 axes to the end:
+            bettersamps = np.moveaxis(possamps,(0,1), (-2,-1))
+            if len(bettersamps.shape) == 2:
+                # Increase number of axes:
+                reshapedsamps = np.reshape(bettersamps, (1,) +\
+                                           bettersamps.shape[0:2])
+                result[key] = reshapedsamps
+            else:
+                result[key] = bettersamps
+    return result

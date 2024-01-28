@@ -7,7 +7,7 @@ def cheat(question: str = "2.2P.11"):
     question (str): question you need help with, include P for Python questions.
     Do not start `question` with Q.
     """
-    if question is "2.2P.11":
+    if question == "2.2P.11":
         with open("videopoker.py", encoding="utf8") as file:
             out = file.readlines()
     elif question in ["2.2P.9", "2.2P.10"]:
