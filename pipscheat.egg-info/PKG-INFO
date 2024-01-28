@@ -7,3 +7,7 @@ Author: Jeroen Timmerman
 Author-email: timmerman.jeroen@gmail.com
 License: MIT
 License-File: LICENSE
+
+# PIPS_Cheat
+
+Defines a function to "cheat" the python assignments in PIPS at UvA.
