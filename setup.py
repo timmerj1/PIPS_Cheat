@@ -9,7 +9,7 @@ setup(
     # Needed to actually package something
     packages=['pipscheat'],
     # Needed for dependencies
-    install_requires=['numpy'],
+    install_requires=['numpy', 'importlib_resources'],
     # *strongly* suggested for sharing
     version='0.1',
     # The license can be anything you like
