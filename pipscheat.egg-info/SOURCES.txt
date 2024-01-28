@@ -1,0 +1,15 @@
+LICENSE
+README.md
+setup.py
+pipscheat/Assignment_1.2.py
+pipscheat/Assignment_2.2.py
+pipscheat/Assignment_3.2.py
+pipscheat/__init__.py
+pipscheat/cheat.py
+pipscheat/sequences.py
+pipscheat/videopoker.py
+pipscheat.egg-info/PKG-INFO
+pipscheat.egg-info/SOURCES.txt
+pipscheat.egg-info/dependency_links.txt
+pipscheat.egg-info/requires.txt
+pipscheat.egg-info/top_level.txt
