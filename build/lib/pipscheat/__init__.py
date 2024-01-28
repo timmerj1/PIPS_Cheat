@@ -1,3 +1,3 @@
 import os
 
-__all__ = ["cheat.py"]
+__all__ = ["cheat"]
