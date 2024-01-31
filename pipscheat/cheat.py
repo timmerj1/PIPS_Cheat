@@ -32,5 +32,4 @@ def cheat(question: str = "2.2P.11"):
         else:
             end = -1
         out = lines[start:end]
-    for i in out:
-        print(i)
+    return out
